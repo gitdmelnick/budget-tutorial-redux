@@ -1,6 +1,6 @@
-import { Statistic } from "semantic-ui-react";
+import { Statistic } from 'semantic-ui-react';
 
-const DisplayBalance = ({title, value, color="black", size="tiny"}) => {
+const DisplayBalance = ({title, value, color='black', size='tiny'}) => {
   return (
     <Statistic size={size} color={color}>
       <Statistic.Label style={{ textAlign: 'left' }}>
