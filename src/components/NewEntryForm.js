@@ -2,8 +2,15 @@ import { Form } from "semantic-ui-react";
 import ButtonConfirmOrCancel from "./ButtonConfirmOrCancel";
 import EntryForm from "./EntryForm";
 
-const NewEntryForm = ({ addEntry, description, value, isExpense, setDescription, setValue, setIsExpense }) => {
-
+const NewEntryForm = ({
+  addEntry,
+  description,
+  value,
+  isExpense,
+  setDescription,
+  setValue,
+  setIsExpense,
+}) => {
   return (
     <Form unstackable>
       <EntryForm
@@ -16,9 +23,6 @@ const NewEntryForm = ({ addEntry, description, value, isExpense, setDescription,
       />
       <ButtonConfirmOrCancel
         addEntry={addEntry}
-        description={description}
-        value={value}
-        isExpense={isExpense}
       />
     </Form>
   );

@@ -1,7 +1,7 @@
 import { Fragment} from "react";
 import { Segment, Grid, Icon } from "semantic-ui-react";
 
-const EntryLine = ({id, description, value, isExpense = false, deleteEntry, setIsOpen}) => {
+const EntryLine = ({id, description, value, isExpense = false, deleteEntry, editEntry}) => {
 
   return (
     <Fragment>
@@ -12,10 +12,10 @@ const EntryLine = ({id, description, value, isExpense = false, deleteEntry, setI
               {description}
             </Grid.Column>
             <Grid.Column width={4} textAlign="right">
-              {value}
+              {`$${value}`}
             </Grid.Column>
             <Grid.Column width={4}>
-              <Icon name="edit" onClick={() => setIsOpen(true)}/>
+              <Icon name="edit" onClick={() => editEntry(id)}/>
               <Icon name="trash" onClick={() => deleteEntry(id)} />
             </Grid.Column>
           </Grid.Row>
