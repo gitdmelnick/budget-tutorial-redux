@@ -1,6 +1,6 @@
 import EntryLine from './EntryLine'
 
-const EntryLines = ({entries, deleteEntry}) => {
+const EntryLines = ({entries, deleteEntry, setIsOpen}) => {
   return (
     <>
       {entries.map((entry, index) => (
@@ -8,6 +8,7 @@ const EntryLines = ({entries, deleteEntry}) => {
 					key={index}
 					{...entry}
 					deleteEntry={deleteEntry}
+          setIsOpen={setIsOpen}
         />
       ))}
     </>

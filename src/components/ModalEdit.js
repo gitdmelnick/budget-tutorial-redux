@@ -1,12 +1,12 @@
 import { Button, Modal } from "semantic-ui-react";
-import NewEntryForm from "./NewEntryForm";
+import EntryForm from "./EntryForm";
 
 const ModalEdit = ({isOpen, setIsOpen}) => {
     return (
         <Modal open={isOpen}>
           <Modal.Header>Edit entry</Modal.Header>
           <Modal.Content>
-            <NewEntryForm />
+            <EntryForm></EntryForm>
           </Modal.Content>
           <Modal.Actions>
             <Button onClick={()=>setIsOpen(false)}>Close</Button>
