@@ -8,7 +8,6 @@ const EntryLines = ({entries, deleteEntry}) => {
 					key={index}
 					{...entry}
 					deleteEntry={deleteEntry}
-					id={index}
         />
       ))}
     </>

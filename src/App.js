@@ -14,9 +14,17 @@ function App() {
   const [entries, setEntries] = useState(initialEntries)
 
   const deleteEntry = (id) => {
-    const result = entries.filter((entry, index) => index !== id);
-    console.log(`entries ${entries}`);
-    console.log(`result ${result}`);
+    const result = entries.filter((entry) => entry.id !== id);
+    setEntries(result);
+  }
+
+  const addEntry = (description, value, isExpense) => {
+    const result = entries.concat({
+      id: entries.length + 1,
+      description,
+      value,
+      isExpense,
+    });
     setEntries(result);
   }
 
@@ -32,7 +40,7 @@ function App() {
       <EntryLines entries={entries} deleteEntry={deleteEntry}/>
 
       <MainHeader type='h3' title='Add new transaction'/>
-      <NewEntryForm/>
+      <NewEntryForm addEntry={addEntry}/>
     </Container>
   );
 }
@@ -41,16 +49,19 @@ export default App;
 
 var initialEntries = [
   {
+    id: 1,
     description: "Paycheck",
     value: "$1000.0",
     isExpense: false
   },
   {
+    id: 2,
     description: "Electricity bill",
     value: "$50.0",
     isExpense: true
   },
   {
+    id: 3,
     description: "Rent",
     value: "$500.0",
     isExpense: true
