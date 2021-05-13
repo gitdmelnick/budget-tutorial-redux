@@ -8,9 +8,9 @@ import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import EntryLines from "./components/EntryLines";
 import ModalEdit from "./components/ModalEdit";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [entries, setEntries] = useState(initialEntries);
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [isExpense, setIsExpense] = useState(true);
@@ -19,6 +19,7 @@ function App() {
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [total, setTotal] = useState(0);
+  const entries = useSelector(state => state.entries)
 
   useEffect(() => {
     if (!isOpen && entryId) {
@@ -27,26 +28,26 @@ function App() {
       newEntries[index].description = description;
       newEntries[index].value = value;
       newEntries[index].isExpense = isExpense;
+      // setEntries(newEntries);
       resetEntry();
-
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   useEffect(() => {
     let totalIncome = 0;
     let totalExpenses = 0;
-    entries.map(entry => {
-      if(entry.isExpense) {
-        return totalExpenses += Number(entry.value)
-      } 
-      else {
-        return totalIncome += Number(entry.value)
+    entries.map((entry) => {
+      if (entry.isExpense) {
+        return (totalExpenses += Number(entry.value));
+      } else {
+        return (totalIncome += Number(entry.value));
       }
-    })
+    });
     setTotal(totalIncome - totalExpenses);
     setExpenseTotal(totalExpenses);
     setIncomeTotal(totalIncome);
-  }, [entries])
+  }, [entries]);
 
   const addEntry = () => {
     const result = entries.concat({
@@ -55,7 +56,7 @@ function App() {
       value,
       isExpense,
     });
-    setEntries(result);
+    // setEntries(result);
     resetEntry();
   };
 
@@ -71,28 +72,22 @@ function App() {
     }
   };
 
-  const deleteEntry = (id) => {
-    const result = entries.filter((entry) => entry.id !== id);
-    setEntries(result);
-  };
-
   const resetEntry = () => {
-    setDescription('');
-    setValue('');
+    setDescription("");
+    setValue("");
     setIsExpense(true);
-  }
+  };
 
   return (
     <Container>
       <MainHeader title="Budget" />
       <DisplayBalance title="Your balance:" value={`$${total}`} size="small" />
 
-      <DisplayBalances expenseTotal={expenseTotal} incomeTotal={incomeTotal}/>
+      <DisplayBalances expenseTotal={expenseTotal} incomeTotal={incomeTotal} />
 
       <MainHeader type="h3" title="History" />
       <EntryLines
         entries={entries}
-        deleteEntry={deleteEntry}
         editEntry={editEntry}
       />
 
@@ -121,24 +116,3 @@ function App() {
 }
 
 export default App;
-
-var initialEntries = [
-  {
-    id: 1,
-    description: "Paycheck",
-    value: 1000,
-    isExpense: false,
-  },
-  {
-    id: 2,
-    description: "Electricity bill",
-    value: 50,
-    isExpense: true,
-  },
-  {
-    id: 3,
-    description: "Rent",
-    value: 500,
-    isExpense: true,
-  },
-];

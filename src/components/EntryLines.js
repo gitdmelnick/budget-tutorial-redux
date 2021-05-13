@@ -1,13 +1,12 @@
 import EntryLine from './EntryLine'
 
-const EntryLines = ({entries, deleteEntry, editEntry}) => {
+const EntryLines = ({entries,  editEntry}) => {
   return (
     <>
       {entries.map((entry, index) => (
         <EntryLine
 					key={index}
 					{...entry}
-					deleteEntry={deleteEntry}
           editEntry={editEntry}
         />
       ))}
